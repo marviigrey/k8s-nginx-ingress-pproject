@@ -1,0 +1,40 @@
+This is the last step:
+We deploy our ingress and configure it to expose all branches of our application.
+
+First we create a YAML file
+vi ingress.yaml
+#input this 
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /watch
+        pathType: Prefix
+        backend:
+          service:
+            name: video-service
+            port:
+              number: 8080
+      - path: /wear
+        pathType: Prefix
+        backend:
+          service:
+            name: wear-service
+            port:
+              number: 8080
+
+      - path: /404
+        pathType: Prefix
+        backend:
+          service:
+            name: default-backend
+            port:
+              number: 8080
+              
+              
+#Run "kubectl create -f ingress.yaml"              
