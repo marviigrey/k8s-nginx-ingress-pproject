@@ -1,0 +1,18 @@
+After configuring ingress controller on our node we create a deployment in a different namespace
+
+kubectl create ns app-space
+
+#creating the first app deployment
+
+Kubectl create deployment web-app-video --image=kodekloud/ecommerce:video -n app-space
+kubectl expose deployment web-app-video --name=video-service --port=8080 -n app-space
+
+#creating second app deployment:
+
+Kubectl create deployment web-app-wear --image=kodekloud/ecommerce:wear -n app-space
+kubectl expose deployment web-app-wear --name=wear-service --port=8080 -n app-space
+
+#creating the default backend deployment and svc
+
+Kubectl create deployment web-app-default --image=kodekloud/ecommerce:404 -n app-space
+kubectl expose deployment web-app-default --name=default --port=8080 -n app-space
